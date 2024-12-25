@@ -17,10 +17,7 @@ namespace E2E
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new E2EForm());
         }
-        
-        
-
     }
 }
