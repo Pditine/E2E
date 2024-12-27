@@ -144,7 +144,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1920, 1080);
+            this.MaximumSize = new System.Drawing.Size(2560, 1600);
             this.MinimizeBox = false;
             this.Name = "E2EForm";
             this.Padding = new System.Windows.Forms.Padding(2, 29, 2, 2);
