@@ -37,10 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Excel">
-      <HintPath>all\Excel.dll</HintPath>
+      <HintPath>dll\Excel.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>all\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>dll\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="SunnyUI, Version=3.8.0.1, Culture=neutral, PublicKeyToken=27d7d2e821d97aeb, processorArchitecture=MSIL">
       <HintPath>packages\SunnyUI.3.8.0.1\lib\net472\SunnyUI.dll</HintPath>
