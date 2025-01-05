@@ -1,16 +1,15 @@
 ﻿
 using System.Drawing;
 using System.Windows.Forms;
-using Sunny.UI;
 
 namespace E2E
 {
     public static class Log
     {
-        private static UIRichTextBox _logBox;
-        public static UIRichTextBox LogBox => _logBox;
+        private static RichTextBox _logBox;
+        public static RichTextBox LogBox => _logBox;
 
-        public static void Init(UIRichTextBox logBox)
+        public static void Init(RichTextBox logBox)
         {
             _logBox = logBox;
         }
@@ -46,6 +45,7 @@ namespace E2E
             _logBox.AppendText(prefix);
             _logBox.SelectionColor = Color.Black;
             _logBox.AppendText($"]{message}");
+            LogBoxToBottom();
         }
         
         public static void Debug(string content)
@@ -76,6 +76,13 @@ namespace E2E
         public static void Faild(string content)
         {
             Print(LogLevel.Faild, content);
+        }
+        
+        private static void LogBoxToBottom()
+        {
+            LogBox.SelectionStart = LogBox.Text.Length;
+            LogBox.SelectionLength = 0;
+            LogBox.ScrollToCaret();
         }
     }
 

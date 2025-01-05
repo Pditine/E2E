@@ -1,27 +1,26 @@
-﻿using Sunny.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Windows.Forms;
 
 namespace E2E
 {
-    public partial class E2EForm : UIForm
+    public partial class E2EForm : Form
     {
         private const string Website = "https://github.com/Pditine/E2E";
         public const string ExcelPath = "./Excel/";
         private string FullExcelPath => Path.GetFullPath(ExcelPath);
-        public const string JsonPath = "./Json/";
+        public const string ExportPath = "./Json/";
+        private string FullExportPath => Path.GetFullPath(ExportPath);
 
         // private List<string> SelectedExcelFileNames => SelectedExcelFilePaths.Select(name => name.Split("/").Last()).ToList();
 
-        private Dictionary<string, string> _excelFilePaths = new Dictionary<string, string>();
-        
-        private string FullJsonPath => Path.GetFullPath(JsonPath);
-        private List<string> SelectedExcelFilePaths => CheckBoxList.SelectedItems.Cast<string>().ToList();
+        private readonly List<string> _excelFiles = new List<string>();
+
+        private List<string> SelectedExcelFilePaths => CheckedListBox.CheckedItems.Cast<string>().ToList();
         
         public E2EForm()
         {
@@ -43,7 +42,7 @@ namespace E2E
 
         private void Setting_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void Convert_Click(object sender, EventArgs e)
@@ -60,11 +59,6 @@ namespace E2E
             pro.StartInfo.UseShellExecute = true;
             pro.StartInfo.FileName = Website;
             pro.Start();
-        }
-
-        private void RichTextBox_TextChanged(object sender, EventArgs e)
-        {
-
         }
         
         private string LoadExcelConverter()
@@ -91,11 +85,11 @@ namespace E2E
         {
             // System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             // var encoding = Encoding.GetEncoding(936);
-            var excelNames = PreLoadExcelFiles();
-            AddExcelFileItem(excelNames);
+            PreLoadExcelFiles();
+            AddExcelFileItems(_excelFiles);
         }
 
-        private List<string> PreLoadExcelFiles()
+        private void PreLoadExcelFiles()
         {
             if (!Directory.Exists(ExcelPath))
             {
@@ -106,23 +100,22 @@ namespace E2E
                 Log.Info($"从 {FullExcelPath} 加载文件");
             }
 
-            if (!Directory.Exists(JsonPath))
+            if (!Directory.Exists(ExportPath))
             {
-                Directory.CreateDirectory(JsonPath);
-                Log.Info($"Json文件夹不存在，已自动创建 {FullJsonPath}");
+                Directory.CreateDirectory(ExportPath);
+                Log.Info($"导出文件夹不存在，已自动创建 {FullExportPath}");
             }
 
             var files = Directory.GetFiles(ExcelPath);
             var fileList = new List<string>(files);
-            fileList.RemoveAll(f => (!f.EndsWith(".xls") && !f.EndsWith(".xlsx"))||f.Contains("~$"));
+            fileList.RemoveAll(IsExcel);
             foreach (var file in fileList)
             {
-                _excelFilePaths.Add(file.Split("/").Last(),file);
+                _excelFiles.Add(file.Split('/').Last());
             }
-            return _excelFilePaths.Keys.ToList();
         }
 
-        private void AddExcelFileItem(List<string> files)
+        private void AddExcelFileItems(List<string> files)
         {
             foreach (var file in files)
             {
@@ -132,15 +125,26 @@ namespace E2E
 
         private void AddExcelFileItem(string file)
         {
-            CheckBoxList.Items.Add(file);
-            CheckBoxList.SelectedItems.Add(file);
+            CheckedListBox.Items.Add(file);
+            CheckedListBox.SelectedItems.Add(file);
         }
 
-        private void LogBoxToBottom()
+        private void Refresh_Click(object sender, EventArgs e)
         {
-            LogBox.SelectionStart = LogBox.Text.Length;
-            LogBox.SelectionLength = 0;
-            LogBox.ScrollToCaret();
+            Log.Init(LogBox);
+            try
+            {
+                InitData();
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception.Message);
+            }
+        }
+
+        private bool IsExcel(string file)
+        {
+            return !file.EndsWith(".xls") && !file.EndsWith(".xlsx") || file.Contains("~$");
         }
     }
 }
