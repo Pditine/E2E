@@ -1,30 +1,95 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
 namespace Converter
 {
     public class Converter
     {
         public const string Name = "Json";
-        
-        public List<(int, string)> Convert(List<List<object>> table)
+        private readonly List<(int, string)> _logs = new List<(int, string)>();
+        public List<(int, string)> Convert(List<List<object>> table, string fileName)
         {
-            List<(int, string)> logs = new List<(int, string)>();
-            
-            for (int i = 0; i < table.Count; i++)
+            _logs.Clear();
+            try
             {
-                string line = "";
-                for (int j = 0; j < table[i].Count; j++)
+                int keyIndex = FindTag("KEY", table[3]);
+                
+                if (keyIndex == -1)
                 {
-                    line += table[i][j] + ",";
+                    _logs.Add((3, "Tag \"key\" not found"));
+                    return _logs;
                 }
-                logs.Add((1, line));
+                
+                StringBuilder json = new StringBuilder();
+                json.Append("{\n");
+                
+                for (int i = 4; i < table.Count; i++)
+                {
+                    json.Append("\t\"");
+                    json.Append(table[i][keyIndex]);
+                    json.Append("\":{");
+                    for (int j = 0; j < table[i].Count; j++)
+                    {
+                        if (j == keyIndex)
+                        {
+                            continue;
+                        }
+                        string valueType = table[1][j].ToString();
+                        if(valueType.ToUpper() == "COMMENT")
+                        {
+                            continue;
+                        }
+                        if(j != 0)
+                            json.Append("\n");
+                        json.Append("\t\t");
+                        json.Append("\"");
+                        json.Append(table[2][j]);
+                        json.Append("\":");
+                        json.Append(GetValueString(valueType, table[i][j]));
+                        json.Append(",");
+                    }
+                    json.Remove(json.Length - 1, 1);
+                    json.Append("\n\t\t},\n");
+                }
+                json.Remove(json.Length - 2, 1);
+                json.Append("}");
+                
+                File.WriteAllText(Setting.ExportPath + fileName + ".json", json.ToString());
             }
-
-            return logs;
+            catch (Exception e)
+            {
+                _logs.Add((3, e.Message + e.StackTrace));
+            }
+            return _logs;
         }
         
-        public bool Check(int width, List<List<object>> table)
+        private int FindTag(string tag, List<object> row)
         {
-            return true;
+            for (int i = 0; i < row.Count; i++)
+            {
+                if (row[i].ToString().ToUpper() == tag)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private string GetValueString(string type, object value)
+        {
+            if (type == "string")
+            {
+                return $"\"{value}\"";
+            }
+            if (type == "int[]")
+            {
+                int[] array = value.ToString().Split(',').Select(int.Parse).ToArray();
+                return $"[{string.Join(",", array)}]";
+            }
+            return value.ToString();
         }
     }
     

@@ -236,10 +236,10 @@ namespace E2E
                 }
                 data.Add(row);
             }
-            DoConvert(data);
+            DoConvert(data, table.TableName);
         }
 
-        private void DoConvert(List<List<object>> table)
+        private void DoConvert(List<List<object>> table, string fileName)
         {
             var converterName = ConverterOption.SelectedItem.ToString();
             var converter = _conveters[converterName];
@@ -253,7 +253,7 @@ namespace E2E
             List<(int, string)>? logs = null;
             try
             {
-                logs = (List<(int, string)>)method.Invoke(converter, new object[] { table });
+                logs = (List<(int, string)>)method.Invoke(converter, new object[] { table, fileName });
             }
             catch (Exception e)
             {
