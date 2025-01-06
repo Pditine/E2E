@@ -31,139 +31,134 @@ namespace E2E
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(E2EForm));
-            this.Converter = new System.Windows.Forms.ComboBox();
-            this.LogBox = new System.Windows.Forms.RichTextBox();
-            this.LinkLabel = new System.Windows.Forms.LinkLabel();
-            this.Convert = new System.Windows.Forms.Button();
-            this.Setting = new System.Windows.Forms.Button();
-            this.CheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.Refresh = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            ConverterOption = new ComboBox();
+            LogBox = new RichTextBox();
+            LinkLabel = new LinkLabel();
+            Convert = new Button();
+            Setting = new Button();
+            CheckedListBox = new CheckedListBox();
+            Refresh = new Button();
+            SuspendLayout();
             // 
-            // Converter
+            // ConverterOption
             // 
-            this.Converter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Converter.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Converter.Location = new System.Drawing.Point(6, 435);
-            this.Converter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Converter.MinimumSize = new System.Drawing.Size(63, 0);
-            this.Converter.Name = "Converter";
-            this.Converter.Size = new System.Drawing.Size(195, 24);
-            this.Converter.TabIndex = 2;
-            this.Converter.Text = "Converter";
+            ConverterOption.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            ConverterOption.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            ConverterOption.Location = new Point(6, 435);
+            ConverterOption.Margin = new Padding(4, 5, 4, 5);
+            ConverterOption.MinimumSize = new Size(63, 0);
+            ConverterOption.Name = "ConverterOption";
+            ConverterOption.Size = new Size(195, 24);
+            ConverterOption.TabIndex = 2;
+            ConverterOption.Text = "Converter";
             // 
             // LogBox
             // 
-            this.LogBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LogBox.Location = new System.Drawing.Point(209, 7);
-            this.LogBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.LogBox.MaximumSize = new System.Drawing.Size(1000, 1000);
-            this.LogBox.MinimumSize = new System.Drawing.Size(1, 1);
-            this.LogBox.Name = "LogBox";
-            this.LogBox.ReadOnly = true;
-            this.LogBox.Size = new System.Drawing.Size(367, 535);
-            this.LogBox.TabIndex = 3;
-            this.LogBox.Text = "欢迎使用ExcelToEverything，这是一个Excel格式转换工具，支持自定义格式转换规则，详细使用说明请点击左下方链接【工程地址】";
+            LogBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            LogBox.Font = new Font("宋体", 10.5F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            LogBox.Location = new Point(209, 7);
+            LogBox.Margin = new Padding(4, 5, 4, 5);
+            LogBox.MaximumSize = new Size(1000, 1000);
+            LogBox.MinimumSize = new Size(1, 1);
+            LogBox.Name = "LogBox";
+            LogBox.ReadOnly = true;
+            LogBox.Size = new Size(367, 535);
+            LogBox.TabIndex = 3;
+            LogBox.Text = "欢迎使用ExcelToEverything，这是一个Excel格式转换工具，支持自定义格式转换规则，详细使用说明请点击左下方链接【工程地址】";
             // 
             // LinkLabel
             // 
-            this.LinkLabel.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.LinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LinkLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LinkLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.LinkLabel.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.LinkLabel.Location = new System.Drawing.Point(107, 475);
-            this.LinkLabel.Name = "LinkLabel";
-            this.LinkLabel.Size = new System.Drawing.Size(77, 23);
-            this.LinkLabel.TabIndex = 4;
-            this.LinkLabel.TabStop = true;
-            this.LinkLabel.Text = "工程链接";
-            this.LinkLabel.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.LinkLabel.Click += new System.EventHandler(this.LinkLabel_Click);
+            LinkLabel.ActiveLinkColor = Color.FromArgb(80, 160, 255);
+            LinkLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            LinkLabel.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            LinkLabel.ForeColor = Color.FromArgb(48, 48, 48);
+            LinkLabel.LinkBehavior = LinkBehavior.AlwaysUnderline;
+            LinkLabel.Location = new Point(107, 475);
+            LinkLabel.Name = "LinkLabel";
+            LinkLabel.Size = new Size(77, 23);
+            LinkLabel.TabIndex = 4;
+            LinkLabel.TabStop = true;
+            LinkLabel.Text = "工程链接";
+            LinkLabel.VisitedLinkColor = Color.FromArgb(230, 80, 80);
+            LinkLabel.Click += LinkLabel_Click;
             // 
             // Convert
             // 
-            this.Convert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Convert.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Convert.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Convert.Location = new System.Drawing.Point(7, 505);
-            this.Convert.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Convert.Name = "Convert";
-            this.Convert.Size = new System.Drawing.Size(92, 35);
-            this.Convert.TabIndex = 5;
-            this.Convert.Text = "Convert";
-            this.Convert.Click += new System.EventHandler(this.Convert_Click);
+            Convert.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            Convert.Cursor = Cursors.Hand;
+            Convert.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            Convert.Location = new Point(7, 505);
+            Convert.MinimumSize = new Size(1, 1);
+            Convert.Name = "Convert";
+            Convert.Size = new Size(92, 35);
+            Convert.TabIndex = 5;
+            Convert.Text = "Convert";
+            Convert.Click += Convert_Click;
             // 
             // Setting
             // 
-            this.Setting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Setting.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Setting.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Setting.Location = new System.Drawing.Point(7, 467);
-            this.Setting.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Setting.Name = "Setting";
-            this.Setting.Size = new System.Drawing.Size(94, 32);
-            this.Setting.TabIndex = 6;
-            this.Setting.Text = "Setting";
-            this.Setting.Click += new System.EventHandler(this.Setting_Click);
+            Setting.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            Setting.Cursor = Cursors.Hand;
+            Setting.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            Setting.Location = new Point(7, 467);
+            Setting.MinimumSize = new Size(1, 1);
+            Setting.Name = "Setting";
+            Setting.Size = new Size(94, 32);
+            Setting.TabIndex = 6;
+            Setting.Text = "Setting";
+            Setting.Click += Setting_Click;
             // 
             // CheckedListBox
             // 
-            this.CheckedListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.CheckedListBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.CheckedListBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.CheckedListBox.HorizontalScrollbar = true;
-            this.CheckedListBox.Location = new System.Drawing.Point(6, 7);
-            this.CheckedListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.CheckedListBox.MaximumSize = new System.Drawing.Size(1000, 1000);
-            this.CheckedListBox.MinimumSize = new System.Drawing.Size(1, 1);
-            this.CheckedListBox.Name = "CheckedListBox";
-            this.CheckedListBox.Size = new System.Drawing.Size(195, 418);
-            this.CheckedListBox.TabIndex = 1;
+            CheckedListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            CheckedListBox.Font = new Font("宋体", 10.5F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            CheckedListBox.HorizontalScrollbar = true;
+            CheckedListBox.Location = new Point(6, 7);
+            CheckedListBox.Margin = new Padding(4, 5, 4, 5);
+            CheckedListBox.MaximumSize = new Size(1000, 1000);
+            CheckedListBox.MinimumSize = new Size(1, 1);
+            CheckedListBox.Name = "CheckedListBox";
+            CheckedListBox.Size = new Size(195, 418);
+            CheckedListBox.TabIndex = 1;
             // 
             // Refresh
             // 
-            this.Refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Refresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Refresh.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Refresh.Location = new System.Drawing.Point(104, 505);
-            this.Refresh.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Refresh.Name = "Refresh";
-            this.Refresh.Size = new System.Drawing.Size(97, 35);
-            this.Refresh.TabIndex = 7;
-            this.Refresh.Text = "Refresh";
-            this.Refresh.Click += new System.EventHandler(this.Refresh_Click);
+            Refresh.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            Refresh.Cursor = Cursors.Hand;
+            Refresh.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            Refresh.Location = new Point(104, 505);
+            Refresh.MinimumSize = new Size(1, 1);
+            Refresh.Name = "Refresh";
+            Refresh.Size = new Size(97, 35);
+            Refresh.TabIndex = 7;
+            Refresh.Text = "Refresh";
+            Refresh.Click += Refresh_Click;
             // 
             // E2EForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(582, 549);
-            this.Controls.Add(this.Refresh);
-            this.Controls.Add(this.Setting);
-            this.Controls.Add(this.Convert);
-            this.Controls.Add(this.LinkLabel);
-            this.Controls.Add(this.LogBox);
-            this.Controls.Add(this.Converter);
-            this.Controls.Add(this.CheckedListBox);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(2560, 1600);
-            this.MinimizeBox = false;
-            this.Name = "E2EForm";
-            this.Padding = new System.Windows.Forms.Padding(2, 29, 2, 2);
-            this.Text = "E2E - Convert Excel To Everything!";
-            this.Load += new System.EventHandler(this.E2E_Load);
-            this.ResumeLayout(false);
-
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(582, 549);
+            Controls.Add(Refresh);
+            Controls.Add(Setting);
+            Controls.Add(Convert);
+            Controls.Add(LinkLabel);
+            Controls.Add(LogBox);
+            Controls.Add(ConverterOption);
+            Controls.Add(CheckedListBox);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(2);
+            MaximizeBox = false;
+            MaximumSize = new Size(2560, 1600);
+            MinimizeBox = false;
+            Name = "E2EForm";
+            Padding = new Padding(2, 29, 2, 2);
+            Text = "E2E - Convert Excel To Everything!";
+            Load += E2E_Load;
+            ResumeLayout(false);
         }
 
         #endregion
-        private ComboBox Converter;
+        private ComboBox ConverterOption;
         private RichTextBox LogBox;
         private LinkLabel LinkLabel;
         private Button Convert;

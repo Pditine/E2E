@@ -14,24 +14,24 @@ namespace E2E
             _logBox = logBox;
         }
 
-        public static void Print(LogLevel level, string message)
+        public static void Print(int level, string message)
         {
             Color color;
             switch (level)
             {
-                case LogLevel.Info:
+                case 1:
                     color = Color.Blue;
                     break;
-                case LogLevel.Warning:
+                case 2:
                     color = Color.Yellow;
                     break;
-                case LogLevel.Error:
+                case 3:
                     color = Color.Red;
                     break;
-                case LogLevel.Succese:
+                case 4:
                     color = Color.Green;
                     break;
-                case LogLevel.Faild:
+                case 5:
                     color = Color.Red;
                     break;
                 default:
@@ -39,13 +39,18 @@ namespace E2E
                     break;
             }
 
-            var prefix = level.ToString();
+            var prefix = ((LogLevel)level).ToString();
             _logBox.AppendText("\n[");
             _logBox.SelectionColor = color;
             _logBox.AppendText(prefix);
             _logBox.SelectionColor = Color.Black;
             _logBox.AppendText($"]{message}");
             LogBoxToBottom();
+        }
+        
+        public static void Print(LogLevel level, string message)
+        {
+            Print((int) level, message);
         }
         
         public static void Debug(string content)
@@ -70,12 +75,12 @@ namespace E2E
         
         public static void Succese(string content)
         {
-            Print(LogLevel.Succese, content);
+            Print(LogLevel.Success, content);
         }
         
         public static void Faild(string content)
         {
-            Print(LogLevel.Faild, content);
+            Print(LogLevel.Failed, content);
         }
         
         private static void LogBoxToBottom()
@@ -88,11 +93,11 @@ namespace E2E
 
     public enum LogLevel
     {
-        Debug,
-        Info,
-        Warning,
-        Error,
-        Succese,
-        Faild
+        Debug = 0,
+        Info = 1,
+        Warning = 2,
+        Error = 3,
+        Success = 4,
+        Failed = 5
     }
 }
