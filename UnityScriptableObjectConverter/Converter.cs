@@ -199,7 +199,6 @@ namespace Converter
     
     public class Setting
     {
-        public string ExcelPath = "./Excel/";
         public string ExportCSPath = "./CS/";
         public string ExportAssetPath = "./Asset/";
         public string NameSpace = "DefaultNamespace";

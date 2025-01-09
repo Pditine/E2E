@@ -7,6 +7,7 @@ public class Converter
     private object _converter;
     private MethodInfo _convertMethod;
     private FieldInfo _converterSetting;
+    public string ExcelPath = "./Excel/";
     public string? Name { get; }
     
     public Converter(object converter)
@@ -24,6 +25,7 @@ public class Converter
         {
             var setting = _converterSetting.GetValue(_converter);
             var result = new Dictionary<string, string>();
+            result["ExcelPath"] = ExcelPath;
             var type = setting.GetType();
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             foreach (var field in fields)
@@ -35,6 +37,7 @@ public class Converter
         set
         {
             var setting = _converterSetting.GetValue(_converter);
+            ExcelPath = value["ExcelPath"];
             foreach (var field in setting.GetType().GetFields())
             {
                 if (value.ContainsKey(field.Name))

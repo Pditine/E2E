@@ -1,5 +1,7 @@
-namespace E2E;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
+namespace E2E;
 public partial class Setting : Form
 {
     private Dictionary<string, Converter> _converters;
@@ -72,5 +74,32 @@ public partial class Setting : Form
         {
             converter.Value.Setting = _settings[converter.Key];
         }
+    }
+
+    private void SaveSetting()
+    {
+        JsonObject json = new JsonObject();
+        foreach (var (key, value) in _settings)
+        {
+            JsonObject setting = new JsonObject();
+            foreach (var (k, v) in value)
+            {
+                setting.Add(k, v);
+            }
+            json.Add(key, setting);
+        }
+        File.WriteAllText("Setting.json", json.ToString());
+    }
+    
+    private void LoadSetting()
+    {
+        if (!File.Exists("Setting.json"))
+        {
+            return;
+        }
+        var json = File.ReadAllText("Setting.json");
+        var document = JsonDocument.Parse(json);
+        var root = document.RootElement;
+        
     }
 }

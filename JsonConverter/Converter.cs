@@ -96,7 +96,6 @@ namespace Converter
     
     public class Setting
     {
-        public string ExcelPath = "./Excel/";
         public string ExportPath = "./Json/";
     }
 }

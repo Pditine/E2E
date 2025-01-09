@@ -8,20 +8,18 @@ namespace E2E
 {
     public partial class E2EForm : Form
     {
+        private readonly List<string> _excelFiles = new();
+        private readonly Dictionary<string, Converter> _converters = new();
+        
         private string Website = "https://github.com/Pditine/E2E";
-        //todo: 使用dll中的Setting
-        public string ExcelPath = "./Excel/";
+        public string ExcelPath => CurrentConverter.ExcelPath;
         private string FullExcelPath => Path.GetFullPath(ExcelPath);
-        public string ExportPath = "./Json/";
-        private string FullExportPath => Path.GetFullPath(ExportPath);
-
         private string DllPath = "/Converter";
 
         // private List<string> SelectedExcelFileNames => SelectedExcelFilePaths.Select(name => name.Split("/").Last()).ToList();
 
-        private readonly List<string> _excelFiles = new();
         private List<string> SelectedExcelFilePaths => CheckedListBox.CheckedItems.Cast<string>().ToList();
-        private readonly Dictionary<string, Converter> _conveters = new();
+        private Converter CurrentConverter => _converters[ConverterOption.SelectedItem.ToString()];
         public E2EForm()
         {
             InitializeComponent();
@@ -39,9 +37,9 @@ namespace E2E
             Log.Init(LogBox);
             try
             {
-                InitData();
                 LoadConverters();
                 InitConverterOption();
+                InitData();
             }
             catch (Exception exception)
             {
@@ -52,7 +50,7 @@ namespace E2E
         #region Event
         private void Setting_Click(object sender, EventArgs e)
         {
-            var setting = new Setting(_conveters);
+            var setting = new Setting(_converters);
             setting.ShowDialog();
         }
 
@@ -75,6 +73,10 @@ namespace E2E
         private void Refresh_Click(object sender, EventArgs e)
         {
             Log.Info("Refresh");
+            _excelFiles.Clear();
+            _converters.Clear();
+            CheckedListBox.Items.Clear();
+            ConverterOption.Items.Clear();
             Init();
         }
         
@@ -114,18 +116,18 @@ namespace E2E
             }
             var newConverter = new Converter(converterInstance);
             Log.Info($"Load converter {newConverter.Name}");
-            if(_conveters.ContainsKey(newConverter.Name))
+            if(_converters.ContainsKey(newConverter.Name))
             {
                 Log.Error($"There is already a converter named {newConverter.Name}");
                 return;
             }
-            _conveters.Add(newConverter.Name, newConverter);
+            _converters.Add(newConverter.Name, newConverter);
             ConverterOption.Items.Add(newConverter.Name);
         }
 
         private void InitConverterOption()
         {
-            if(_conveters.Count == 0)
+            if(_converters.Count == 0)
             {
                 Log.Error("No converter found");
                 return;
@@ -152,12 +154,6 @@ namespace E2E
             }else
             {
                 Log.Info($"从 {FullExcelPath} 加载文件");
-            }
-
-            if (!Directory.Exists(ExportPath))
-            {
-                Directory.CreateDirectory(ExportPath);
-                Log.Info($"导出文件夹不存在，已自动创建 {FullExportPath}");
             }
 
             var files = Directory.GetFiles(ExcelPath).ToList();
@@ -241,9 +237,7 @@ namespace E2E
 
         private void DoConvert(List<List<object>> table, string fileName)
         {
-            var converterName = ConverterOption.SelectedItem.ToString();
-            var converter = _conveters[converterName];
-            converter.Convert(table, fileName);
+            CurrentConverter.Convert(table, fileName);
         }
 
         #endregion
