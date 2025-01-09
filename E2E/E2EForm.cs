@@ -21,7 +21,7 @@ namespace E2E
 
         private readonly List<string> _excelFiles = new();
         private List<string> SelectedExcelFilePaths => CheckedListBox.CheckedItems.Cast<string>().ToList();
-        private readonly Dictionary<string?, Converter> _conveters = new();
+        private readonly Dictionary<string, Converter> _conveters = new();
         public E2EForm()
         {
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace E2E
         #region Event
         private void Setting_Click(object sender, EventArgs e)
         {
-            var setting = new Setting();
+            var setting = new Setting(_conveters);
             setting.ShowDialog();
         }
 

@@ -17,17 +17,18 @@ public class Converter
         var nameField = _converter.GetType().GetField("Name");
         Name = (string)nameField.GetValue(_converter);
     }
-
-
+    
     public Dictionary<string, string> Setting
     {
         get
         {
             var setting = _converterSetting.GetValue(_converter);
             var result = new Dictionary<string, string>();
-            foreach (var field in setting.GetType().GetFields())
+            var type = setting.GetType();
+            var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (var field in fields)
             {
-                result[field.Name] = field.GetValue(setting).ToString();
+                result[field.Name] = field.GetValue(setting)?.ToString();
             }
             return result;
         }

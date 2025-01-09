@@ -6,7 +6,7 @@ namespace Converter
 {
     public class Converter
     {
-        private Setting Setting = new Setting();
+        public Setting Setting = new Setting();
         public const string Name = "Unity-SO";
         private readonly List<(int, string)> _logs = new List<(int, string)>();
         
@@ -199,10 +199,10 @@ namespace Converter
     
     public class Setting
     {
-        public string ExcelPath => "./Excel/";
-        public string ExportCSPath => "./CS/";
-        public string ExportAssetPath => "./Asset/";
-        public string NameSpace => "DefaultNamespace";
-        public string Attribute => "";
+        public string ExcelPath = "./Excel/";
+        public string ExportCSPath = "./CS/";
+        public string ExportAssetPath = "./Asset/";
+        public string NameSpace = "DefaultNamespace";
+        public string Attribute = "";
     }
 }

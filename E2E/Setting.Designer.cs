@@ -32,55 +32,33 @@ partial class Setting
     private void InitializeComponent()
     {
         ComponentResourceManager resources = new ComponentResourceManager(typeof(Setting));
-        label1 = new Label();
-        label2 = new Label();
-        textBox1 = new TextBox();
+        SettingList = new ListView();
         SuspendLayout();
         // 
-        // label1
+        // SettingList
         // 
-        label1.AutoSize = true;
-        label1.Location = new Point(12, 9);
-        label1.Name = "label1";
-        label1.Size = new Size(43, 17);
-        label1.TabIndex = 0;
-        label1.Text = "label1";
-        // 
-        // label2
-        // 
-        label2.AutoSize = true;
-        label2.Location = new Point(12, 38);
-        label2.Name = "label2";
-        label2.Size = new Size(43, 17);
-        label2.TabIndex = 1;
-        label2.Text = "label2";
-        // 
-        // textBox1
-        // 
-        textBox1.Location = new Point(61, 32);
-        textBox1.Name = "textBox1";
-        textBox1.Size = new Size(100, 23);
-        textBox1.TabIndex = 2;
+        SettingList.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        SettingList.Location = new Point(12, 1);
+        SettingList.Name = "SettingList";
+        SettingList.Size = new Size(345, 562);
+        SettingList.TabIndex = 0;
+        SettingList.UseCompatibleStateImageBehavior = false;
         // 
         // Setting
         // 
         AutoScaleDimensions = new SizeF(7F, 17F);
         AutoScaleMode = AutoScaleMode.Font;
         AutoScroll = true;
-        ClientSize = new Size(379, 563);
-        Controls.Add(textBox1);
-        Controls.Add(label2);
-        Controls.Add(label1);
+        CausesValidation = false;
+        ClientSize = new Size(386, 271);
+        Controls.Add(SettingList);
         Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "Setting";
         Text = "Setting";
         ResumeLayout(false);
-        PerformLayout();
     }
 
     #endregion
 
-    private Label label1;
-    private Label label2;
-    private TextBox textBox1;
+    private ListView SettingList;
 }
