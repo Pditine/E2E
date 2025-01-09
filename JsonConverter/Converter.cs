@@ -8,6 +8,7 @@ namespace Converter
 {
     public class Converter
     {
+        private Setting Setting = new Setting();
         public const string Name = "Json";
         private readonly List<(int, string)> _logs = new List<(int, string)>();
         public List<(int, string)> Convert(List<List<object>> table, string fileName)
@@ -93,9 +94,9 @@ namespace Converter
         }
     }
     
-    public static class Setting
+    public class Setting
     {
-        public static string ExcelPath => "./Excel/";
-        public static string ExportPath => "./Json/";
+        public string ExcelPath => "./Excel/";
+        public string ExportPath => "./Json/";
     }
 }

@@ -21,7 +21,7 @@ namespace E2E
 
         private readonly List<string> _excelFiles = new();
         private List<string> SelectedExcelFilePaths => CheckedListBox.CheckedItems.Cast<string>().ToList();
-        private readonly Dictionary<string, object> _conveters = new();
+        private readonly Dictionary<string?, Converter> _conveters = new();
         public E2EForm()
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace E2E
             try
             {
                 InitData();
-                LoadConverter();
+                LoadConverters();
                 InitConverterOption();
             }
             catch (Exception exception)
@@ -52,7 +52,8 @@ namespace E2E
         #region Event
         private void Setting_Click(object sender, EventArgs e)
         {
-            
+            var setting = new Setting();
+            setting.ShowDialog();
         }
 
         private void Convert_Click(object sender, EventArgs e)
@@ -79,9 +80,9 @@ namespace E2E
         
         #endregion
 
-        #region InitConveret
+        #region InitConvereter
 
-        private void LoadConverter()
+        private void LoadConverters()
         {
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             
@@ -93,11 +94,11 @@ namespace E2E
             foreach (var f in files)
             {
                 // f is dll's full path
-                LoadConverterDll(f);
+                LoadConverter(f);
             }
         }
 
-        private void LoadConverterDll(string path)
+        private void LoadConverter(string path)
         {
             Assembly assembly = Assembly.LoadFile(path);
             string dllName = path.Split('/').Last();
@@ -111,15 +112,15 @@ namespace E2E
             {
                 Log.Error("Instance not found");
             }
-            MethodInfo method = type.GetMethod("Convert");
-            if (method == null)
+            var newConverter = new Converter(converterInstance);
+            Log.Info($"Load converter {newConverter.Name}");
+            if(_conveters.ContainsKey(newConverter.Name))
             {
-                Log.Error("Method \"Convert\" not found");
+                Log.Error($"There is already a converter named {newConverter.Name}");
+                return;
             }
-            string converterName = (string)type.GetField("Name").GetValue(converterInstance);
-            Log.Info($"Load converter {converterName}");
-            _conveters.Add(converterName, converterInstance);
-            ConverterOption.Items.Add(converterName);
+            _conveters.Add(newConverter.Name, newConverter);
+            ConverterOption.Items.Add(newConverter.Name);
         }
 
         private void InitConverterOption()
@@ -221,7 +222,6 @@ namespace E2E
             {
                 LoadSheet(table);
             }
-            
         }
         
         private void LoadSheet(DataTable table)
@@ -243,33 +243,7 @@ namespace E2E
         {
             var converterName = ConverterOption.SelectedItem.ToString();
             var converter = _conveters[converterName];
-            var method = converter.GetType().GetMethod("Convert");
-            if (method == null)
-            {
-                Log.Error("Method \"Convert\" not found");
-                return;
-            }
-
-            List<(int, string)>? logs = null;
-            try
-            {
-                logs = (List<(int, string)>)method.Invoke(converter, new object[] { table, fileName });
-            }
-            catch (Exception e)
-            {
-                Log.Error(e.Message + e.StackTrace);
-            }
-
-            if (logs == null)
-            {
-                Log.Error("Convert failed");
-                return;
-            }
-            foreach (var log in logs)
-            {
-                Log.Print(log.Item1, log.Item2);
-            }
-            Log.Succese("Convert success");
+            converter.Convert(table, fileName);
         }
 
         #endregion

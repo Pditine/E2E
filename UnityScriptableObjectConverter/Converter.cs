@@ -6,6 +6,7 @@ namespace Converter
 {
     public class Converter
     {
+        private Setting Setting = new Setting();
         public const string Name = "Unity-SO";
         private readonly List<(int, string)> _logs = new List<(int, string)>();
         
@@ -49,7 +50,7 @@ namespace Converter
                 CS.Append("using UnityEngine;\n\n");
                 CS.Append("namespace " + Setting.NameSpace + "\n");
                 CS.Append("{\n");
-                // CS.Append("    [CreateAssetMenu(fileName = \"" + fileName + "\", menuName = \"" + fileName + "\")]\n");
+                CS.Append(Setting.Attribute + "\n");
                 CS.Append("    public class " + fileName + " : ScriptableObject\n");
                 CS.Append("    {\n");
                 for (int i = 4; i < table.Count; i++)
@@ -196,11 +197,12 @@ namespace Converter
         }
     }
     
-    public static class Setting
+    public class Setting
     {
-        public static string ExcelPath => "./Excel/";
-        public static string ExportCSPath => "./CS/";
-        public static string ExportAssetPath => "./Asset/";
-        public static string NameSpace => "DefaultNamespace";
+        public string ExcelPath => "./Excel/";
+        public string ExportCSPath => "./CS/";
+        public string ExportAssetPath => "./Asset/";
+        public string NameSpace => "DefaultNamespace";
+        public string Attribute => "";
     }
 }
