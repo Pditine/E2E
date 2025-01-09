@@ -40,7 +40,7 @@ partial class Setting
         SettingList.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         SettingList.Location = new Point(12, 1);
         SettingList.Name = "SettingList";
-        SettingList.Size = new Size(345, 562);
+        SettingList.Size = new Size(328, 562);
         SettingList.TabIndex = 0;
         SettingList.UseCompatibleStateImageBehavior = false;
         // 
@@ -55,6 +55,7 @@ partial class Setting
         Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "Setting";
         Text = "Setting";
+        FormClosed += Setting_FormClosed;
         ResumeLayout(false);
     }
 

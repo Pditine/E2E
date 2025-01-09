@@ -3,6 +3,7 @@ namespace E2E;
 public partial class Setting : Form
 {
     private Dictionary<string, Converter> _converters;
+    private Dictionary<string, Dictionary<string, string>> _settings = new();
     public Setting(Dictionary<string, Converter> converters)
     {
         InitializeComponent();
@@ -29,6 +30,7 @@ public partial class Setting : Form
     private void InitSetting(Converter converter, ref int index)
     {
         var setting = converter.Setting;
+        _settings[converter.Name] = setting;
         var title = new Label
         {
             Text = converter.Name,
@@ -36,7 +38,7 @@ public partial class Setting : Form
             AutoSize = true
         };
         SettingList.Controls.Add(title);
-        
+
         index++;
         foreach (var (key, value) in setting)
         {
@@ -54,14 +56,21 @@ public partial class Setting : Form
             };
             textBox.TextChanged += (sender, e) =>
             {
-                // todo: 保存设置
                 setting[key] = textBox.Text;
             };
             index++;
             SettingList.Controls.Add(label);
             SettingList.Controls.Add(textBox);
         }
-        
+
         SettingList.Height = index * 30;
+    }
+
+    private void Setting_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        foreach (var converter in _converters)
+        {
+            converter.Value.Setting = _settings[converter.Key];
+        }
     }
 }
