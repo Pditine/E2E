@@ -57,7 +57,8 @@ namespace Converter
                 }
                 json.Remove(json.Length - 2, 1);
                 json.Append("}");
-                
+                if(!Directory.Exists(Setting.ExportPath))
+                    Directory.CreateDirectory(Setting.ExportPath);
                 File.WriteAllText(Setting.ExportPath + fileName + ".json", json.ToString());
             }
             catch (Exception e)

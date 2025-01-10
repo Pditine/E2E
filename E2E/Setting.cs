@@ -23,6 +23,7 @@ public partial class Setting : Form
     private void InitSettings()
     {
         int index = 0;
+        MergeSettingToConverters(_converters);
         foreach (var converter in _converters)
         {
             InitSetting(converter.Value, ref index);
@@ -74,12 +75,13 @@ public partial class Setting : Form
         {
             converter.Value.Setting = _settings[converter.Key];
         }
+        SaveSetting(_settings);
     }
 
-    private void SaveSetting()
+    private static void SaveSetting(Dictionary<string, Dictionary<string, string>> settings)
     {
         JsonObject json = new JsonObject();
-        foreach (var (key, value) in _settings)
+        foreach (var (key, value) in settings)
         {
             JsonObject setting = new JsonObject();
             foreach (var (k, v) in value)
@@ -91,15 +93,68 @@ public partial class Setting : Form
         File.WriteAllText("Setting.json", json.ToString());
     }
     
-    private void LoadSetting()
+    private static Dictionary<string, Dictionary<string, string>> LoadSetting()
     {
         if (!File.Exists("Setting.json"))
         {
-            return;
+            return null;
         }
         var json = File.ReadAllText("Setting.json");
-        var document = JsonDocument.Parse(json);
-        var root = document.RootElement;
-        
+        var root = JsonNode.Parse(json).AsObject();
+        var result = new Dictionary<string, Dictionary<string, string>>();
+        foreach (var (key, value) in root)
+        {
+            var setting = new Dictionary<string, string>();
+            foreach (var (k, v) in value.AsObject())
+            {
+                setting[k] = v.ToString();
+            }
+            result[key] = setting;
+        }
+        return result;
+    }
+    
+    private static Dictionary<string, string> LoadSetting(string converterName)
+    {
+        if (!File.Exists("Setting.json"))
+        {
+            return null;
+        }
+        var json = File.ReadAllText("Setting.json");
+        var root = JsonNode.Parse(json).AsObject();
+        if (!root.ContainsKey(converterName))
+        {
+            return null;
+        }
+        var setting = new Dictionary<string, string>();
+        foreach (var (k, v) in root[converterName].AsObject())
+        {
+            setting[k] = v.ToString();
+        }
+        return setting;
+    }
+    
+    public static void MergeSettingToConverters(Dictionary<string, Converter> converters)
+    {
+        var settings = LoadSetting();
+        if(settings == null)
+        {
+            return;
+        }
+        foreach (var (key, value) in settings)
+        {
+            if (converters.ContainsKey(key))
+            {
+                converters[key].Setting = value;
+            }
+        }
+    }
+    public static void MergeSettingToConverter(Converter converter)
+    {
+        var setting = LoadSetting(converter.Name);
+        if (setting != null)
+        {
+            converter.Setting = setting;
+        }
     }
 }

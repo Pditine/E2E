@@ -114,7 +114,6 @@ namespace Converter
                         asset.Append("    " + table[2][j] + ": " + GetValueString(valueType, table[i][j]) + "\n");
                     }
                 }
-                
                 // write to file
                 System.IO.Directory.CreateDirectory(Setting.ExportCSPath);
                 System.IO.Directory.CreateDirectory(Setting.ExportAssetPath);
