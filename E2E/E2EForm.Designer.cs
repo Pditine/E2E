@@ -73,13 +73,15 @@ namespace E2E
             LinkLabel.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
             LinkLabel.ForeColor = Color.FromArgb(48, 48, 48);
             LinkLabel.LinkBehavior = LinkBehavior.AlwaysUnderline;
-            LinkLabel.Location = new Point(107, 475);
+            LinkLabel.Location = new Point(114, 475);
+            LinkLabel.MaximumSize = new Size(77, 23);
             LinkLabel.Name = "LinkLabel";
             LinkLabel.Size = new Size(77, 23);
             LinkLabel.TabIndex = 4;
             LinkLabel.TabStop = true;
             LinkLabel.Text = "工程链接";
             LinkLabel.VisitedLinkColor = Color.FromArgb(230, 80, 80);
+            LinkLabel.LinkClicked += LinkLabel_LinkClicked;
             LinkLabel.Click += LinkLabel_Click;
             // 
             // Convert
@@ -88,6 +90,7 @@ namespace E2E
             Convert.Cursor = Cursors.Hand;
             Convert.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
             Convert.Location = new Point(7, 505);
+            Convert.MaximumSize = new Size(92, 35);
             Convert.MinimumSize = new Size(1, 1);
             Convert.Name = "Convert";
             Convert.Size = new Size(92, 35);
@@ -101,9 +104,10 @@ namespace E2E
             Setting.Cursor = Cursors.Hand;
             Setting.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
             Setting.Location = new Point(7, 467);
+            Setting.MaximumSize = new Size(94, 32);
             Setting.MinimumSize = new Size(1, 1);
             Setting.Name = "Setting";
-            Setting.Size = new Size(94, 32);
+            Setting.Size = new Size(92, 32);
             Setting.TabIndex = 6;
             Setting.Text = "Setting";
             Setting.Click += Setting_Click;
@@ -127,6 +131,7 @@ namespace E2E
             Refresh.Cursor = Cursors.Hand;
             Refresh.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
             Refresh.Location = new Point(104, 505);
+            Refresh.MaximumSize = new Size(97, 35);
             Refresh.MinimumSize = new Size(1, 1);
             Refresh.Name = "Refresh";
             Refresh.Size = new Size(97, 35);

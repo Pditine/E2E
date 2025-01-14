@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace E2E;
 
-partial class Setting
+partial class SettingForm
 {
     /// <summary>
     /// Required designer variable.
@@ -31,7 +31,7 @@ partial class Setting
     /// </summary>
     private void InitializeComponent()
     {
-        ComponentResourceManager resources = new ComponentResourceManager(typeof(Setting));
+        ComponentResourceManager resources = new ComponentResourceManager(typeof(SettingForm));
         SettingList = new ListView();
         SuspendLayout();
         // 
@@ -53,7 +53,7 @@ partial class Setting
         ClientSize = new Size(386, 271);
         Controls.Add(SettingList);
         Icon = (Icon)resources.GetObject("$this.Icon");
-        Name = "Setting";
+        Name = "SettingForm";
         Text = "Setting";
         FormClosed += Setting_FormClosed;
         ResumeLayout(false);

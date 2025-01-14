@@ -10,7 +10,7 @@ namespace E2E
     {
         private readonly List<string> _excelFiles = new();
         private readonly Dictionary<string, Converter> _converters = new();
-        
+
         private string Website = "https://github.com/Pditine/E2E";
         public string ExcelPath => CurrentConverter.ExcelPath;
         private string FullExcelPath => Path.GetFullPath(ExcelPath);
@@ -24,7 +24,7 @@ namespace E2E
         {
             InitializeComponent();
         }
-        
+
         private void E2E_Load(object sender, EventArgs e)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -41,16 +41,16 @@ namespace E2E
                 InitConverterOption();
                 InitData();
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                Log.Error(exception.Message + exception.StackTrace);
+                Log.Error(e);
             }
         }
-        
+
         #region Event
         private void Setting_Click(object sender, EventArgs e)
         {
-            var setting = new Setting(_converters);
+            var setting = new SettingForm(_converters);
             setting.ShowDialog();
         }
 
@@ -69,7 +69,7 @@ namespace E2E
             pro.StartInfo.FileName = Website;
             pro.Start();
         }
-        
+
         private void Refresh_Click(object sender, EventArgs e)
         {
             Log.Info("Refresh");
@@ -79,7 +79,7 @@ namespace E2E
             ConverterOption.Items.Clear();
             Init();
         }
-        
+
         #endregion
 
         #region InitConvereter
@@ -87,7 +87,7 @@ namespace E2E
         private void LoadConverters()
         {
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            
+
             // find all Assembly
             var dllPath = path + DllPath;
             var files = Directory.GetFiles(dllPath).ToList();
@@ -116,7 +116,7 @@ namespace E2E
             }
             var newConverter = new Converter(converterInstance);
             Log.Info($"Load converter {newConverter.Name}");
-            if(_converters.ContainsKey(newConverter.Name))
+            if (_converters.ContainsKey(newConverter.Name))
             {
                 Log.Error($"There is already a converter named {newConverter.Name}");
                 return;
@@ -127,7 +127,7 @@ namespace E2E
 
         private void InitConverterOption()
         {
-            if(_converters.Count == 0)
+            if (_converters.Count == 0)
             {
                 Log.Error("No converter found");
                 return;
@@ -151,7 +151,8 @@ namespace E2E
             {
                 Directory.CreateDirectory(ExcelPath);
                 Log.Info($"Excel文件夹不存在，已自动创建 {FullExcelPath}");
-            }else
+            }
+            else
             {
                 Log.Info($"从 {FullExcelPath} 加载文件");
             }
@@ -177,12 +178,12 @@ namespace E2E
             CheckedListBox.Items.Add(file);
             CheckedListBox.SelectedItems.Add(file);
         }
-        
+
         private bool IsExcel(string file)
         {
             return !file.EndsWith(".xls") && !file.EndsWith(".xlsx") || file.Contains("~$");
         }
-        
+
         #endregion
 
         #region Convert
@@ -197,7 +198,7 @@ namespace E2E
             Log.Info($"加载文件 {excelPath}");
             using var fs = File.Open(excelPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             IExcelDataReader excelDataReader;
-            if(excelPath.EndsWith(".xls"))
+            if (excelPath.EndsWith(".xls"))
             {
                 excelDataReader = ExcelReaderFactory.CreateBinaryReader(fs);
             }
@@ -206,20 +207,20 @@ namespace E2E
                 excelDataReader = ExcelReaderFactory.CreateOpenXmlReader(fs);
             }
             fs.Close();
-            
+
             var result = excelDataReader.AsDataSet();
-            if(result == null)
+            if (result == null)
             {
                 Log.Error($"文件读取失败 {excelPath} : {excelDataReader.ExceptionMessage}");
                 return;
             }
-            
+
             foreach (DataTable table in result.Tables)
             {
                 LoadSheet(table);
             }
         }
-        
+
         private void LoadSheet(DataTable table)
         {
             List<List<object>> data = new();
@@ -241,5 +242,10 @@ namespace E2E
         }
 
         #endregion
+
+        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }
