@@ -41,16 +41,16 @@ namespace E2E
                 InitConverterOption();
                 InitData();
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                Log.Error(exception.Message + exception.StackTrace);
+                Log.Error(e);
             }
         }
 
         #region Event
         private void Setting_Click(object sender, EventArgs e)
         {
-            var setting = new Setting(_converters);
+            var setting = new SettingForm(_converters);
             setting.ShowDialog();
         }
 

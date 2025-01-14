@@ -73,6 +73,14 @@ namespace E2E
             Print(LogLevel.Error, content);
         }
         
+        public static void Error(Exception exception)
+        {
+            if(Setting.DebugMode)
+                Print(LogLevel.Error, exception.Message + exception.StackTrace);
+            else
+                Print(LogLevel.Error, exception.Message);
+        }
+        
         public static void Succese(string content)
         {
             Print(LogLevel.Success, content);

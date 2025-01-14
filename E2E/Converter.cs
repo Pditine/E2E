@@ -50,7 +50,7 @@ public class Converter
     
     public void Convert(List<List<object>> table, string fileName)
     { 
-        E2E.Setting.MergeSettingToConverter(this);
+        E2E.SettingForm.MergeSettingToConverter(this);
         List<(int, string)>? logs = null;
         try
         {
@@ -58,7 +58,7 @@ public class Converter
         }
         catch (Exception e)
         {
-            Log.Error(e.Message + e.StackTrace);
+            Log.Error(e);
         }
 
         if (logs == null)

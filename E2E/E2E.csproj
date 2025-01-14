@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Setting.cs">
+    <Compile Update="SettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
