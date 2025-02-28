@@ -4,7 +4,7 @@
 
 ## 简介
 
-E2E(Excel to Everything)是一个Excel格式转换工具，你可以使用将Excel转换成 任何! 你想要的格式，如json、xml、lua等，甚至是Unity的Scriptable Object这样在细分领域需要的格式，或者你自创的格式。如果你需要的格式和转换规则没有被默认给出，下文也会告诉你如何编写适配该工具的dll，将dll放置在指定位置，你就可以使用自定义的格式转换规则啦~当我们编写dll足够多，这个工具就能真正的实现Excel万用转换。
+E2E(Excel to Everything)是一个Excel格式转换工具，你可以将Excel转换成任何!!你想要的格式，如json、xml、lua等，甚至是Unity的Scriptable Object这样在细分领域需要的格式，又或者你自创的格式。如果你需要的格式和转换规则没有被默认给出，下文也会告诉你如何编写适配该工具的dll，将dll放置在指定位置，你就可以使用自定义的格式转换规则啦。当我们编写dll足够多，这个工具就能真正的实现Excel万用转换。
 
 ## 快速开始
 
@@ -40,10 +40,10 @@ E2E(Excel to Everything)是一个Excel格式转换工具，你可以使用将Exc
 
 ![image-20250227154111821](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250227154111821.png)
 
-- 第一行是字段名称
+- 第一行是字段解释
 - 第二行是字段类型
-- 第三行是字段编码名称
-- 第四行用于设置tag
+- 第三行是字段名称
+- 第四行用于设置tag，大小写不敏感
 - 第五行之后的每一行表示一个数据对象
 
 根据选取的转换器，表结构在具体使用时可能会有所变化。

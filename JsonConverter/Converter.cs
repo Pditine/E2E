@@ -34,12 +34,8 @@ namespace Converter
                     json.Append("\":{");
                     for (int j = 0; j < table[i].Count; j++)
                     {
-                        if (j == keyIndex)
-                        {
-                            continue;
-                        }
                         string valueType = table[1][j].ToString();
-                        if(valueType.ToUpper() == "COMMENT")
+                        if(valueType.ToUpper() == "COMMENT" || valueType.ToUpper() == "")
                         {
                             continue;
                         }
@@ -72,7 +68,7 @@ namespace Converter
         {
             for (int i = 0; i < row.Count; i++)
             {
-                if (row[i].ToString().ToUpper() == tag)
+                if (row[i].ToString().ToUpper() == tag.ToUpper())
                 {
                     return i;
                 }

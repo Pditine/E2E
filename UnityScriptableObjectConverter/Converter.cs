@@ -68,7 +68,7 @@ namespace Converter
                         continue;
                     }
                     string valueType = table[1][j].ToString();
-                    if(valueType.ToUpper() == "COMMENT")
+                    if(valueType.ToUpper() == "COMMENT" || valueType.ToUpper() == "")
                     {
                         continue;
                     }
@@ -107,10 +107,10 @@ namespace Converter
                             continue;
                         }
                         string valueType = table[1][j].ToString();
-                        if(valueType.ToUpper() == "COMMENT")
-                        {
-                            continue;
-                        }
+                        // if(valueType.ToUpper() == "COMMENT")
+                        // {
+                        //     continue;
+                        // }
                         asset.Append("    " + table[2][j] + ": " + GetValueString(valueType, table[i][j]) + "\n");
                     }
                 }
