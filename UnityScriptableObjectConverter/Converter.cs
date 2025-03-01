@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Converter
@@ -134,12 +135,12 @@ namespace Converter
         {
             for (int i = 0; i < row.Count; i++)
             {
-                if (row[i].ToString().ToUpper() == tag)
+                List<string> tags = row[i].ToString().ToUpper().Split(',').ToList();
+                if (tags.Contains(tag.ToUpper()))
                 {
                     return i;
                 }
             }
-
             return -1;
         }
         

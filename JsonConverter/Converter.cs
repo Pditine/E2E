@@ -68,7 +68,8 @@ namespace Converter
         {
             for (int i = 0; i < row.Count; i++)
             {
-                if (row[i].ToString().ToUpper() == tag.ToUpper())
+                List<string> tags = row[i].ToString().ToUpper().Split(',').ToList();
+                if (tags.Contains(tag.ToUpper()))
                 {
                     return i;
                 }

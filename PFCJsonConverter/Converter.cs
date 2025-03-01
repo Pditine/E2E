@@ -83,9 +83,9 @@ namespace Converter
                         CS.Append("\n        /// <summary>\n");
                         int commentIndex = FindTag("comment", table[3]);
                         if (commentIndex != -1)
-                            CS.Append("        /// ID: " + table[i][refIndex] + ", " + table[i][commentIndex] + "\n");
+                            CS.Append("        /// " + table[2][keyIndex] + ": " + table[i][keyIndex] + ", " + table[i][commentIndex] + "\n");
                         else
-                            CS.Append("        /// ID: " + table[i][refIndex] + "\n");
+                            CS.Append("        /// " + table[2][keyIndex] + ": " + table[i][keyIndex] + "\n");
                         
                         CS.Append("        /// </summary>\n");
                         CS.Append("        public " + fileName + "Item " + table[i][refIndex] + " => GetItem(\"" + table[i][keyIndex] + "\"); \n");
@@ -107,7 +107,7 @@ namespace Converter
                         continue;
                     }
                     string valueType = table[1][j].ToString();
-                    if (valueType.ToUpper() == "COMMENT")
+                    if (valueType.ToUpper() == "COMMENT" || valueType.ToUpper() == "")
                     {
                         continue;
                     }
@@ -131,7 +131,8 @@ namespace Converter
         {
             for (int i = 0; i < row.Count; i++)
             {
-                if (row[i].ToString().ToUpper() == tag.ToUpper())
+                List<string> tags = row[i].ToString().ToUpper().Split(',').ToList();
+                if (tags.Contains(tag.ToUpper()))
                 {
                     return i;
                 }
