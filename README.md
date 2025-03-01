@@ -20,25 +20,25 @@ E2E(Excel to Everything)是一个Excel格式转换工具，你可以将Excel转�
 
 你需要选择你想要的转换器，如json。点击下拉菜单，选择json
 
-![image-20250227154527289](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250227154527289.png)
+![image-20250301202851657](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250301202851657.png)
 
 ### 设置
 
 点击Setting，确保当前设置是正确的。通常需要注意选项的是ExcelPath，这是E2E读取Excel的路径，你需要将xsl或xlsx文件放置在该路径下。
 
-![image-20250227154606771](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250227154606771.png)
+![image-20250301202753968](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250301202753968.png)
 
 ### 转换数据
 
 在左侧列表中选择你希望转换的Excel文件，点击左下角的Convert按钮
 
-![image-20250227154639802](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250227154639802.png)
+![image-20250301202828545](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250301202828545.png)
 
 ## Excel表结构
 
 常用的表结构如下
 
-![image-20250227154111821](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250227154111821.png)
+![image-20250301202550717](https://tuchuange.oss-cn-beijing.aliyuncs.com/img/image-20250301202550717.png)
 
 - 第一行是字段解释
 - 第二行是字段类型
@@ -48,7 +48,15 @@ E2E(Excel to Everything)是一个Excel格式转换工具，你可以将Excel转�
 
 根据选取的转换器，表结构在具体使用时可能会有所变化。
 
-## 自定义转换器
+### 默认转换器
+
+[Json](./JsonConverter/README.md)
+
+[Unity_SO](./UnityScriptableObjectConverter/README.md)
+
+[PFC_Json](./PFCJsonConverter/README.md)
+
+## 自定义转换器(编写中)
 
 如果你想自定义转换器和格式转换规则，你需要编写适配E2E的dll
 
