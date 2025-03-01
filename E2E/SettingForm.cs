@@ -93,7 +93,8 @@ public partial class SettingForm : Form
         File.WriteAllText("Setting.json", json.ToString());
     }
     
-    private static Dictionary<string, Dictionary<string, string>> LoadSetting()
+    // todo: 下沉功能
+    public static Dictionary<string, Dictionary<string, string>> LoadSetting()
     {
         if (!File.Exists("Setting.json"))
         {
@@ -114,7 +115,7 @@ public partial class SettingForm : Form
         return result;
     }
     
-    private static Dictionary<string, string> LoadSetting(string converterName)
+    public static Dictionary<string, string> LoadSetting(string converterName)
     {
         if (!File.Exists("Setting.json"))
         {

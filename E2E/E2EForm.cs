@@ -39,6 +39,7 @@ namespace E2E
             {
                 LoadConverters();
                 InitConverterOption();
+                SettingForm.MergeSettingToConverters(_converters);
                 InitData();
             }
             catch (Exception e)
@@ -86,7 +87,7 @@ namespace E2E
 
         private void LoadConverters()
         {
-            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var path = Path.GetDirectoryName(AppContext.BaseDirectory);
 
             // find all Assembly
             var dllPath = path + DllPath;
